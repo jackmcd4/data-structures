@@ -9,15 +9,19 @@ var Queue = function(){
 
   someInstance.enqueue = function(value){
 
-    storage[0]=value;
+    storage[size]=value;
     size++;
   };
 
   someInstance.dequeue = function(){
-    
-    var result = storage[size-1]
+
+
+    var result = storage[0]
     if(size>0){
-      delete storage[size-1]
+      for (var i=0; i<size; i++){
+        storage[i]=storage[i+1];
+      }
+      delete storage[size];
       size--;
     }
     return result;
