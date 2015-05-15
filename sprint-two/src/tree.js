@@ -20,23 +20,21 @@ treeMethods.addChild = function(value){
 };
 
 treeMethods.contains = function(target){
-  //does tree object.value === target?
-    //return true
-var recurse = function(node){//doesn't work because of scope...
-    for(var i = 0; i<node.length; i++){
-      if(node[i].value===target){
-        return true;
-      } else if(node[i].children.length!==0){
-        recurse(node[i].children);
-    }
-  }
-return false;
-}
+    var truthy = false;
+    var recurse = function(node){
+      if(node.value === target){
+        truthy = true;
+      }
 
-return recurse(this.children);
+      for(var i=0; i<node.children.length; i++){
+        recurse(node.children[i]);
+      }
+    };
 
+    recurse(this);
+    return truthy;
 
-};
+  };
 
 
 /*
